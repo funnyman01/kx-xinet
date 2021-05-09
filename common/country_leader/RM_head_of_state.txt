@@ -1,0 +1,36 @@
+
+leader_traits = {
+	gru_volksfuehrer = {
+		random = no
+		stability_factor = 0.15
+		political_power_gain = 0.25
+		war_support_factor = 0.2
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	gru_froncophobe = {
+		random = no
+		targeted_modifier = { tag = FRA attack_bonus_against = 0.15 }
+		targeted_modifier = { tag = NFA attack_bonus_against = 0.10 }
+		targeted_modifier = { tag = WLL attack_bonus_against = 0.10 }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	gru_imperialist = {
+		random = no
+		justify_war_goal_time = -0.25
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	gru_chairman = {
+		random = no
+		stability_factor = 0.20
+		political_power_gain = 0.25
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

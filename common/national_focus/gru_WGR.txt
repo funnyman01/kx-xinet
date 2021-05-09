@@ -1,0 +1,297 @@
+#skeleton tree lole!!! 
+
+
+focus_tree = { 
+	id = WGR_COLLAPSE
+
+	country = {
+		factor = 0
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 0 y = 2350 }
+
+	focus = { #First Political Focus
+		id = WGR_THE_REPUBLIC
+		icon = WGR
+		x = 5
+		y = 0
+		cost = 1
+		
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_THE_REPUBLIC"
+			custom_effect_tooltip = WGR_birth_of_republic
+			hidden_effect = {
+				country_event = {
+					id = WGR.2
+					days = 7    
+				}
+			}
+		}
+	}
+
+	focus = { #French Border Crisis
+		id = WGR_FRENCH_BORDER
+		icon = WGR
+		x = 30
+		y = 1
+		available = {
+			has_country_flag = WGR_FRENCH_BORDER_CRISIS
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_FRENCH_BORDER"
+			custom_effect_tooltip = WGR_french_border_stance
+		}
+	}
+	
+	focus = { #Negotiate 
+		id = WGR_FRENCH_NEGOTIATION
+		icon = WGR
+		x = 25
+		y = 2
+		available = {
+			has_country_flag = WGR_FRENCH_NEGOTIATION
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+		prerequisite = { focus = WGR_FRENCH_BORDER }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_FRENCH_NEGOTIATION"
+			custom_effect_tooltip = WGR_french_border_negotation
+			add_stability += 0.1
+		}
+	}
+		
+	focus = { #WAR!
+		id = WGR_FRENCH_BORDER_WAR
+		icon = WGR
+		x = 30
+		y = 2
+		available = {
+			has_country_flag = WGR_FRENCH_BORDER_WAR
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+		prerequisite = { focus = WGR_FRENCH_BORDER  }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_FRENCH_BORDER_WAR"
+			custom_effect_tooltip = WGR_french_border_war
+			add_stability -= 0.1
+		}
+	}
+
+	focus = { #Negotiations Fail!
+		id = WGR_NEGOTIATION_FAILURE
+		icon = WGR
+		x = 28
+		y = 3
+		available = {
+			has_country_flag = WGR_FRENCH_NEGOTIATION_FAILURE
+		}
+		bypass = {
+		has_country_flag = WGR_FRENCH_NEGOTIATION_FAILURE
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+		prerequisite = { focus = WGR_FRENCH_NEGOTIATION  }
+		mutually_exclusive = { focus = WGR_NEGOTIATION_SUCCESS }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_NEGOTIATION_FAILURE"
+			custom_effect_tooltip = WGR_french_negotiations_failed
+			add_stability -= 0.1
+		}
+	}
+
+	focus = { #Negotiations Succeed!
+		id = WGR_NEGOTIATION_SUCCESS
+		icon = WGR
+		x = 22
+		y = 3
+		available = {
+			has_country_flag = WGR_FRENCH_NEGOTIATION_SUCCESS
+		}
+		bypass = {
+			has_country_flag = WGR_FRENCH_NEGOTIATION_SUCCESS
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 1
+		}
+		prerequisite = { focus = WGR_FRENCH_NEGOTIATION  }
+		mutually_exclusive = { focus = WGR_NEGOTIATION_FAILURE }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_NEGOTIATION_SUCCESS"
+			custom_effect_tooltip = WGR_french_negotiations_success
+			hidden_effect = {
+				set_country_flag = WGR_NEGOTIATIONS_SUCCEED
+			}
+		}
+	}
+	
+	focus = { #Against Godless Syndicalism (add idea later)
+		id = WGR_AGAINST_SYNDIES
+		icon = WGR
+		x = 28
+		y = 4
+		available = {
+			has_war_with = FRA
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		prerequisite = { focus = WGR_NEGOTIATION_FAILURE  focus = WGR_FRENCH_BORDER_WAR }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_AGAINST_SYNDIES"
+			add_war_support = 0.1
+		}
+	}
+	
+	focus = { #Mobilize Reserves
+		id = WGR_MASS_MOBILIZATION
+		icon = WGR
+		x = 29
+		y = 5
+		available = {
+			has_war_with = FRA
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		prerequisite = { focus = WGR_AGAINST_SYNDIES }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_MASS_MOBILIZATION"
+			add_manpower = 50000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = GER
+			}
+		}
+	}
+
+	focus = { #Radical Anti-Communard Propaganda (add idea here)
+		id = WGR_ANTI_COMMUNARD_PROPAGANDA
+		icon = WGR
+		x = 27
+		y = 5
+		available = {
+			has_war_with = FRA
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		prerequisite = { focus = WGR_AGAINST_SYNDIES }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_ANTI_COMMUNARD_PROPAGANDA"
+		}
+	}
+	focus = { #We will fight... add idea here lole
+		id = WGR_WE_WILL_FIGHT
+		icon = WGR
+		x = 28
+		y = 6
+		available = {
+			has_war_with = FRA
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		prerequisite = { focus = WGR_ANTI_COMMUNARD_PROPAGANDA }
+		prerequisite = { focus = WGR_MASS_MOBILIZATION }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_WE_WILL_FIGHT"
+		}
+	}
+	focus = { #for a better germany replace the idea above :troll:
+		id = WGR_FOR_A_BETTER_GERMANY
+		icon = WGR
+		x = 28
+		y = 7
+		available = {
+			has_war_with = FRA
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		prerequisite = { focus = WGR_WE_WILL_FIGHT }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_FOR_A_BETTER_GERMANY"
+		}
+	}
+	focus = { #Renounce Claims to Alsace
+		id = WGR_STOP_ALSACE_CLAIM
+		icon = WGR
+		x = 21
+		y = 4
+		available = {
+			has_country_flag = WGR_NEGOTIATIONS_SUCCEED
+		}
+		cost = 2
+		ai_will_do = {
+			factor = 10
+		}
+		prerequisite = { focus = WGR_NEGOTIATION_SUCCESS }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_STOP_ALSACE_CLAIM"
+			custom_effect_tooltip = WGR_STOPPED_ALSACE_CLAIM
+			add_stability = 0.05
+			add_opinion_modifier = { target = FRA modifier = small_increase }
+		}
+	}
+	focus = { #Calm Anti-Communard Propagada
+		id = WGR_CALM_ANTI_COMMUNARD_PROPAGANDA
+		icon = WGR
+		x = 21
+		y = 5
+		available = {
+			has_country_flag = WGR_NEGOTIATIONS_SUCCEED
+		}
+		cost = 2
+		ai_will_do = {
+			factor = 10
+		}
+		prerequisite = { focus = WGR_STOP_ALSACE_CLAIM }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_CALM_ANTI_COMMUNARD_PROPAGANDA"
+			add_opinion_modifier = { target = FRA modifier = small_increase }
+		}
+	}
+	
+	focus = { #For a Peaceful Europe (cringe add idea)
+		id = WGR_FOR_A_PEACEFUL_EUROPE
+		icon = WGR
+		x = 21
+		y = 6
+		available = {
+			has_country_flag = WGR_NEGOTIATIONS_SUCCEED
+		}
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		prerequisite = { focus = WGR_CALM_ANTI_COMMUNARD_PROPAGANDA }
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus WGR_CALM_ANTI_COMMUNARD_PROPAGANDA"
+		}
+	}
+	
